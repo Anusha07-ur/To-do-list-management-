@@ -1,0 +1,117 @@
+todo_app/
+│
+├── main.py           # Entry point (CLI menu)
+├── task_manager.py   # All task operations (add, view, update, mark done, delete)
+└── data.py           # Stores task list
+# data.py
+# Stores the task list and maximum task limit
+
+tasks = []
+MAX_TASKS = 8
+# task_manager.py
+from data import tasks, MAX_TASKS
+
+def add_task():
+    if len(tasks) >= MAX_TASKS:
+        print("⚠️ Maximum task limit reached (8).")
+        return
+    desc = input("Enter task description: ")
+    task_id = len(tasks) + 1
+    tasks.append({"id": task_id, "task": desc, "status": "Pending"})
+    print("✅ Task added successfully!")
+
+def view_tasks():
+    if not tasks:
+        print("No tasks available.")
+        return
+    print("\n===== Task List =====")
+    for t in tasks:
+        print(f"ID: {t['id']} | Task: {t['task']} | Status: {t['status']}")
+    print("=====================\n")
+
+def update_task():
+    if not tasks:
+        print("No tasks to update.")
+        return
+    try:
+        task_id = int(input("Enter Task ID to update: "))
+        for t in tasks:
+            if t["id"] == task_id:
+                new_desc = input("Enter new description: ")
+                t["task"] = new_desc
+                print("✅ Task updated successfully!")
+                return
+        print("⚠️ Task ID not found.")
+    except ValueError:
+        print("⚠️ Please enter a valid number.")
+
+def mark_done():
+    if not tasks:
+        print("No tasks available.")
+        return
+    try:
+        task_id = int(input("Enter Task ID to mark as done: "))
+        for t in tasks:
+            if t["id"] == task_id:
+                if t["status"] == "Done":
+                    print("Task already marked as done.")
+                else:
+                    t["status"] = "Done"
+                    print("✅ Task marked as done!")
+                return
+        print("⚠️ Task ID not found.")
+    except ValueError:
+        print("⚠️ Please enter a valid number.")
+
+def delete_task():
+    if not tasks:
+        print("No tasks to delete.")
+        return
+    try:
+        task_id = int(input("Enter Task ID to delete: "))
+        for t in tasks:
+            if t["id"] == task_id:
+                tasks.remove(t)
+                print("🗑️ Task deleted successfully!")
+                # Reassign IDs
+                for i, task in enumerate(tasks, start=1):
+                    task["id"] = i
+                return
+        print("⚠️ Task ID not found.")
+    except ValueError:
+        print("⚠️ Please enter a valid number.")
+# main.py
+import task_manager
+
+def menu():
+    while True:
+        print("""
+===== To-Do List Application =====
+1. Add Task
+2. View Tasks
+3. Update Task
+4. Mark Task as Done
+5. Delete Task
+6. Exit
+==================================
+""")
+        choice = input("Enter your choice (1-6): ")
+
+        if choice == "1":
+            task_manager.add_task()
+        elif choice == "2":
+            task_manager.view_tasks()
+        elif choice == "3":
+            task_manager.update_task()
+        elif choice == "4":
+            task_manager.mark_done()
+        elif choice == "5":
+            task_manager.delete_task()
+        elif choice == "6":
+            print("👋 Exiting application. Goodbye!")
+            break
+        else:
+            print("⚠️ Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    menu()
