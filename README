@@ -1,0 +1,19 @@
+✅ Features Implemented:
+
+Add, View, Update, Mark as Done, Delete, and Exit
+
+Task limit: 8 tasks maximum
+
+Task IDs auto-generated and updated after deletions
+
+Simple console-based menu
+
+Includes input validation and clear user message
+
+▶️ How to Run
+
+Put all three files in one folder (e.g., todo_app/).
+
+Open a terminal or VS Code terminal in that folder.
+
+Run:
