@@ -1,3 +1,29 @@
+todo-list-python
+📝 To-Do List (Python Project)
+A simple and scalable To-Do List application built using Python with OOPS concept and functions.
+
+Add new tasks with title, description, and due date View all tasks with their status Update task status (Pending / Completed) Delete tasks by ID Persistent storage using JSON file
+
+Project Structure
+
+todo_list_project/
+│
+├── main.py          # Entry point (CLI menu)
+├── task.py          # Task class
+├── task_manager.py  # TaskManager class (CRUD operations)
+├── file_handler.py  # Load/Save tasks
+└── tasks.json       # Stores all tasks
+Example Usage
+
+📌 To-Do List Menu
+1. Add Task
+2. View Tasks
+3. Delete Task
+4. Update Task Status
+5. Exit
+📜 License
+This project is open source and available under the MIT License.
+
 ✅ Features Implemented:
 
 Add, View, Update, Mark as Done, Delete, and Exit
